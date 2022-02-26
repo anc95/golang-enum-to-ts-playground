@@ -1,23 +1,38 @@
-import { VFC, useRef, useState, useEffect } from 'react';
+import { VFC, useRef, useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import styles from './style.module.css';
+import { useEditorModel } from '../../context/editorContext';
 
-export const Editor: VFC = () => {
+interface EditorProps {
+	name: string,
+	layout?: {
+		width: number
+		height: number
+	},
+	readonly?: boolean
+	options: monaco.editor.IStandaloneEditorConstructionOptions
+}
+
+export const Editor = (props: EditorProps) => {
 	const [editor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor | null>(null);
 	const monacoEl = useRef(null);
+	const { actions } = useEditorModel()
 
 	useEffect(() => {
 		if (monacoEl && !editor) {
-			setEditor(
-				monaco.editor.create(monacoEl.current!, {
-					value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-					language: 'typescript'
-				})
+			const editor = (
+				monaco.editor.create(monacoEl.current!, props.options)
 			);
+			
+			setEditor(editor)
+			actions.setEditor(props.name, editor)
 		}
 
 		return () => editor?.dispose();
 	}, [monacoEl.current]);
 
-	return <div className={styles.Editor} ref={monacoEl}></div>;
+	useEffect(() => {
+		editor?.layout(props.layout)
+	}, [props?.layout?.width, props?.layout?.height, editor])
+
+	return <div style={{textAlign: "left"}} ref={monacoEl}></div>;
 };

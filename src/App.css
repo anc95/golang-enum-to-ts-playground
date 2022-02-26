@@ -1,12 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -39,4 +30,11 @@
 
 button {
   font-size: calc(10px + 2vmin);
+}
+
+.transform-button {
+  position: fixed !important;
+  top: 20%;
+  z-index: 10;
+  left: 30%;
 }
