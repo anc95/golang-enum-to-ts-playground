@@ -1,5 +1,5 @@
 import { VFC, useRef, useState, useEffect, useImperativeHandle, forwardRef } from 'react';
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import * as monaco from 'monaco-editor';
 import { useEditorModel } from '../../context/editorContext';
 
 interface EditorProps {

@@ -34,7 +34,7 @@ button {
 
 .transform-button {
   position: fixed !important;
-  top: 20%;
+  top: 74px;
   z-index: 10;
-  left: 30%;
+  left: 40%;
 }
