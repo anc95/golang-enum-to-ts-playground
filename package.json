@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "yarn build-wasm && vite",
-    "build": "yarn build-wasm && tsc && vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "build-wasm": "cd transform && GOOS=js GOARCH=wasm go build -o ../main.wasm && cd -"
   },
