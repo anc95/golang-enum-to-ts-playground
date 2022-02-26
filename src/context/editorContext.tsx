@@ -15,12 +15,12 @@ const useEditorModel = () => {
 }
 
 const EditorProvider = (props: React.PropsWithChildren<{}>) => {
-  const [editors, setEditors] = useState({})
+  const [editors, setEditors] = useState<any>({})
   const setEditor = (id: string, editor: monaco.editor.IStandaloneCodeEditor) => {
     editors[id] = editor
     setEditors({...editors})
   }
-  const getEditor = id => editors[id]
+  const getEditor = (id: string) => editors[id]
 
   return <EditorContext.Provider value={{state: editors, actions: { setEditor, getEditor }}}>{props.children}</EditorContext.Provider>
 }

@@ -1,4 +1,4 @@
-const transform = async (value) => {
+const transform = async (value: string) => {
   const res = fetch("main.wasm");
   const go = new (window as any).Go()
 
