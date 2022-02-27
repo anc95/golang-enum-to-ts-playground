@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
 import Grid from '@mui/material/Grid'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import AppBar from './components/AppBar';
 import './App.css'
 import { ToggleColorMode } from './context/colorMode'
@@ -23,8 +24,9 @@ const Container = styled('div')(({theme}) => {
 
 function App() {
   const width = useWidth()
-  const height = useHeight()
+  const height = useHeight() - 80
   const { actions } = useEditorModel()
+  const matches = useMediaQuery('(min-width:600px)');
 
   const handleClickTransform = async () => {
     const golang = actions.getEditor('golang')
@@ -37,16 +39,16 @@ function App() {
       <AppBar />
       <Button className="transform-button" onClick={handleClickTransform} variant="contained">Transform</Button>
       <GridContainer container spacing={2} rowSpacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <Editor 
-            layout={{width: width/2, height}} 
+            layout={{width: width/2, height: matches ? height : height / 2}} 
             options={{automaticLayout:true, language: 'go', value: demo1, theme: 'my-theme'}} 
             name='golang'
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <Editor 
-            layout={{width: width/2, height}} 
+            layout={{width: width/2, height: matches ? height : height / 2}} 
             options={{automaticLayout:true, language: 'typescript', readOnly: true}} 
             name='typescript' 
           />
